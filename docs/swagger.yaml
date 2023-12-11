@@ -97,6 +97,44 @@ paths:
             operationId: id
             summary: Get full details of a given game
             description: 'Returns full details of a given game, based on the id input by the user.'
+        delete:
+            tags:
+                - delete
+            parameters:
+                -
+                    examples:
+                        Integer id:
+                            value: '55'
+                    name: id
+                    description: ID for game in array
+                    schema:
+                        type: integer
+                    in: path
+                    required: true
+            responses:
+                '204':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                204 response:
+                                    value:
+                                        error: No Content
+                    description: No Content
+                '404':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                Game /w+ was not found:
+                                    value:
+                                        error: Game \w+ was not found
+                    description: Game not found
+            operationId: Id
+            summary: Delete a game by id
+            description: Deletes a game of the given id
         parameters:
             -
                 examples:
@@ -140,3 +178,15 @@ components:
                 name: Tetris
                 price: 1.99
                 rating: 5
+        delete-game:
+            title: Root Type for delete-game
+            description: ''
+            required:
+                - id
+            type: object
+            properties:
+                id:
+                    format: int32
+                    type: integer
+            example:
+                id: 1
