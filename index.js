@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 const app = express()
 const port = 8080
 const swaggerUI = require('swagger-ui-express');
@@ -6,6 +7,7 @@ const yamljs = require('yamljs');
 //const swaggerDocument = require('./docs/swagger.json');
 const swaggerDocument = yamljs.load('./docs/swagger.yaml');
 app.use(express.json())
+app.use(cors())
 
 const games = [
     {id: 1, name: "Team Fortress 2", price: "free", rating: 5},
