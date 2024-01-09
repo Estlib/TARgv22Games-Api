@@ -17,4 +17,10 @@ db.Sequelize = Sequelize
 db.sequelize = sequelize
 db.games = require("./models/Game.model")(sequelize,Sequelize)
 
-module.exports = db
+
+async function Sync() {
+    await sequelize.sync({alter:true}) // modifies existing table
+                        //force:true      erases existing table and recreates it
+}
+
+module.exports = {db, Sync}

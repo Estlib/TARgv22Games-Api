@@ -3,7 +3,9 @@ const express = require('express')
 const cors = require('cors')
 const app = express()
 //const mariadb = require("mariadb")
-const port = process.env.APP_PORT; //|| 8080;
+const port = process.env.APP_PORT;
+console.log(process.env.USER)
+console.log(process.env.PASS)
 const swaggerUI = require('swagger-ui-express');
 const yamljs = require('yamljs');
 //const swaggerDocument = require('./docs/swagger.json');
@@ -26,20 +28,6 @@ app.use(cors())
 ] */
 
 require("./routes/app_routes")(app)
-
-/* app.get('/games', async (req, res) =>{
-    let connection
-    try{
-        connection = await pool.getConnection()
-        const rows = await connection.query("SELECT id, name FROM games")
-        console.log(rows)
-        res.send(rows)
-    } catch (error) {
-        throw error
-    } finally {
-        if(connection) return connection.end()
-    }
-}) */
 
 app.get('/games/:id', (req, res) =>{
     if(typeof games[req.params.id - 1] === 'undefined')
@@ -78,7 +66,7 @@ app.delete('/games/:id', (req, res) =>{
 
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
-app.listen(port, () => {console.log(`API up at: http://localhost:${port}`)})
+app.listen(port, async () => {console.log(`API up at: http://localhost:${port}`)})
 
 function getBaseUrl(req) {
     return req.connection && req.connection.encrypted ? 'https' : 'http' + `://${req.headers.host}`
