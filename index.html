@@ -20,6 +20,8 @@
                 <td>{{game.rating}}/5</td>
             </tr>
         </table>
+
+
         <div id="gameInfoModal" class="modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -46,26 +48,8 @@
 
     <script src="https://unpkg.com/vue@3.3.11/dist/vue.global.js"></script>
 
-    <script>
-        const vue = Vue.createApp({
-            data() {
-                
-                return { 
-                    games: [],
-                    gameInModal: {name: null}, 
-                }
-        },
-        async created() {
-            this.games = await (await fetch('http://localhost:8080/games')).json();
-        },
-        methods: {
-            getGame: async function(id) {
-                this.gameInModal = await (await fetch(`http://localhost:8080/games/${id}`)).json();
-                let gameInfoModal = new bootstrap.Modal(document.getElementById('gameInfoModal'), {})
-                gameInfoModal.show();
-            }
-        }
-    }).mount('#app')
-    </script>
+    <script src="games-frontend/rest-client.js"></script>
+
+    
 </body>
 </html>

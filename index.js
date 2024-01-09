@@ -1,7 +1,9 @@
+require("dotenv").config();
 const express = require('express')
 const cors = require('cors')
 const app = express()
-const port = 8080
+//const mariadb = require("mariadb")
+const port = process.env.APP_PORT; //|| 8080;
 const swaggerUI = require('swagger-ui-express');
 const yamljs = require('yamljs');
 //const swaggerDocument = require('./docs/swagger.json');
@@ -9,7 +11,9 @@ const swaggerDocument = yamljs.load('./docs/swagger.yaml');
 app.use(express.json())
 app.use(cors())
 
-const games = [
+
+
+/* const games = [
     {id: 1, name: "Team Fortress 2", price: "free", rating: 5},
     {id: 2, name: "Cyberpunk 2077", price: 69.99, rating: 3},
     {id: 3, name: "Paladins: Champions of the Realm", price: "free", rating: 4},
@@ -19,11 +23,23 @@ const games = [
     {id: 7, name: "Half:Life", price: "free", rating: 5},
     {id: 8, name: "Portal", price: 2.99, rating: 5},
     {id: 9, name: "Goat Simulator", price: 12.99, rating: 3}    
-]
+] */
 
-app.get('/games', (req, res) =>{
-    res.send(games)
-})
+require("./routes/app_routes")(app)
+
+/* app.get('/games', async (req, res) =>{
+    let connection
+    try{
+        connection = await pool.getConnection()
+        const rows = await connection.query("SELECT id, name FROM games")
+        console.log(rows)
+        res.send(rows)
+    } catch (error) {
+        throw error
+    } finally {
+        if(connection) return connection.end()
+    }
+}) */
 
 app.get('/games/:id', (req, res) =>{
     if(typeof games[req.params.id - 1] === 'undefined')
