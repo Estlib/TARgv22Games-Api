@@ -146,6 +146,27 @@ paths:
                     type: integer
                 in: path
                 required: true
+    /influencers:
+        get:
+            tags:
+                - Influencers
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: string
+                            examples:
+                                Example of an influencer:
+                                    value:
+                                        -
+                                            onlinename: JackSepticEye
+                                        -
+                                            onlinename: Markiplier
+                    description: Returned all Influencers in API to the requester.
+            description: Returns a list of all Influencers in API
 components:
     schemas:
         error:
