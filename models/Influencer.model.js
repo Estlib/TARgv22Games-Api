@@ -27,5 +27,5 @@ module.exports = (sequelize,Sequelize) => {
             allowNull: true
         },
     })
-    return Game
+    return Influencer
 }
