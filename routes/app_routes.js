@@ -13,7 +13,7 @@ module.exports = (app) => {
     app.route("/influencers")
         .get(influencersController.getAll)     // get all games as list
     //    .post(gamesController.createNew) // create a new game
-    //app.route("/influencers/:id")     
+    app.route("/influencers/:id")     
         .get(influencersController.getById)    // get a game by id
     //    .put(gamesController.updateById) // change info of a game by id
     //    .delete(gamesController.deleteById) // delete a game by id
